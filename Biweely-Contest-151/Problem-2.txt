@@ -1,0 +1,17 @@
+class Solution {
+public:
+    const int MOD = 1e9 + 7;
+    int countArrays(vector<int>& org, vector<vector<int>>& bounds) {
+        int n = org.size();
+
+        int lower = bounds[0][0], higher = bounds[0][1];
+
+        for(int i = 1;i<n;i++){
+            int diff = org[i] - org[i-1];
+            lower = max(lower+diff, bounds[i][0]);
+            higher = min(higher+diff, bounds[i][1]);
+            if(lower>higher) return 0;
+        }
+        return higher - lower + 1;
+    }
+};
