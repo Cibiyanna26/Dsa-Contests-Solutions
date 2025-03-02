@@ -1,0 +1,33 @@
+class Solution
+{
+    public:
+    int largestInteger(vector<int> &nums, int k)
+    {
+        int res = -1;
+        unordered_map<int, int> mp;
+        int n = nums.size();
+
+        for (int i = 0; i < n - k + 1; i++)
+        {
+            // int fl = 0;
+            set<int> st;
+            for (int j = i; j < i + k && j < n; j++)
+            {
+                if (st.find(nums[j]) == st.end())
+                {
+                    mp[nums[j]]++;
+                }
+                st.insert(nums[j]);
+            }
+        }
+
+        for (auto x : mp)
+        {
+            if (x.second == 1)
+            {
+                res = max(res, x.first);
+            }
+        }
+        return res;
+}
+}
